@@ -14,16 +14,21 @@ app.get('/',(req,res)=>{
 
 
 app.get('/news/:id',(req,res)=>{
-  const countryId = req.params.id
+  // take country code from url
+  const countryId = req.params.id;
   console.log(countryId);
+  // call news api for get the news data
   newsapi.v2.topHeadlines({
     country: countryId
   }).then(response => {
-    console.log(response.length);
-    res.send(response);
+    if(response.totalResults === 0){
+      res.status(404).json({msg:'Data not found'})
+    }else{
+      res.send(response);
+    }
   }).catch(err=>{
-    res.send('Request Not accepted');
+    res.status(500).json({msg:'Data not found'})
   })
 })
 
-  app.listen(port,()=> console.log("started"))
+app.listen(port);
