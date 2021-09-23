@@ -2,7 +2,7 @@ const express = require('express');
 const app=express();
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI('1d1324fef2124ed187895300a5127710');
-const port = process.env.PORT||3000;
+const port = process.env.PORT||5000;
 const cors=require('cors');
 const { response } = require('express');
 app.use(cors());
